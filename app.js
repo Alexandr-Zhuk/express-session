@@ -7,7 +7,7 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://127.0.0.1:27017/testSession');
+const db = mongoose.connect('mongodb://127.0.0.1:27017/testSession');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -32,7 +32,6 @@ app.use(session({
   store: MongoStore.create({
     client: mongoose.connection.getClient(),
     dbName: 'testSession',
-    
     }),
   cookie: { secure: false }
 }));
